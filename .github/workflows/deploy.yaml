@@ -1,0 +1,22 @@
+name: Déploiement Continu (IDC)
+
+on:
+  push:
+    branches:
+      - main # Vérifie si ta branche principale s'appelle 'main' ou 'master' et modifie si besoin
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Étape 1 - Récupérer le code depuis GitHub
+        uses: actions/checkout@v4
+
+      - name: Étape 2 - Envoyer le code sur la machine via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: "." 
+          target: "/home/ubuntu/projet-idc" # C'est le dossier de destination sur ta machine
