@@ -1,5 +1,5 @@
 import unittest
-from mon_module import addition, division
+from modules import addition, division
 
 class TestMonModule(unittest.TestCase):
     def test_addition(self):
